@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "covinoc"
+    }
+  },
+  "defaultProject": "covinoc",
+  "cli": {
+    "analytics": false
+  }
 }
