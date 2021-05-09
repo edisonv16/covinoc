@@ -3,7 +3,7 @@ import { TareaModel } from 'src/app/models/tarea.model';
 import { NgForm } from '@angular/forms';
 import { TareaService } from '../../services/tareas.service';
 import Swal from 'sweetalert2';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nueva-tarea',
@@ -13,10 +13,19 @@ import { Observable } from 'rxjs';
 export class NuevaTareaComponent implements OnInit {
 
   tarea: TareaModel =new TareaModel();
+  suscription: Subscription;
+
+  reloadCurrentPage() {
+    window.location.reload();
+  }
 
   constructor(private tareasService: TareaService) {}
 
   ngOnInit(): void {
+    this.suscription = this.tareasService.refresh$
+    .subscribe(()=>{
+      this.tareasService.getTareas();
+    });
   }
   guardar( form: NgForm ){
     if(form.invalid){

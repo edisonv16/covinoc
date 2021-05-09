@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TareaModel } from '../models/tarea.model';
-import { map, delay } from 'rxjs/operators';
+import { map, delay, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,26 @@ import { map, delay } from 'rxjs/operators';
 export class TareaService {
 
   private url = 'https://tareas-6f894-default-rtdb.firebaseio.com';
+
+  private _refresh$ = new Subject<void>();
+
+  get refresh$(){
+    return this._refresh$;
+  }
+
   constructor(private http: HttpClient) {}
 
  //crear una tarea
   createTarea( tarea: TareaModel){
     return this.http.post(`${this.url}/tareas.json`,tarea)
-    .pipe(
+    .pipe(   
       map((resp: any) =>{
         tarea.id = resp.name;
         return tarea;
+        this._refresh$.next();
+      }),
+      tap(()=>{
+        this._refresh$.next();
       })
     );
   }

@@ -1,15 +1,13 @@
-<h1 class="mt-5">Lista de tareas</h1>
-<hr />
 <div class="row">
-  <div class="col text-right"><i class="fa fa-list"></i> Crear</div>
+  <div class="col text-right"><i class="fa fa-list"></i> Lista de tareas</div>
 </div>
 <table class="table mt-3">
   <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Mis tareas</th>
-      <th scope="col">completada</th>
-      <th scope="col">Borrar</th>
+    <tr class="text-success">
+      <th scope="col "><p class="fw-light">#</p></th>
+      <th scope="col"><p class="fw-light">Mis tareas</p></th>
+      <th scope="col"><p class="fw-light text-center">completada</p></th>
+      <th scope="col"><p class="fw-light text-center">Borrar</p></th>
     </tr>
   </thead>
 
@@ -19,7 +17,7 @@
       <td [ngClass]="tarea.estado ? 'classtrue' : 'classfalse'">
         {{ tarea.nombre }}
       </td>
-      <td>
+      <td class="text-center">
         <input
           class="form-check-input"
           type="checkbox"
@@ -27,13 +25,15 @@
           [(ngModel)]="tarea.estado"
           name="estado"
         />
-        {{ tarea.estado }}
+        
       </td>
-      <td>
-        <button class="btn btn-danger" (click)="borrarTarea(tarea, i)">
+      <td class="text-center">
+        <button class="btn btn-danger me-2" (click)="borrarTarea(tarea, i)">
           <i class="fa fa-trash"></i>
         </button>
-        <button (click)="actualizarTarea(tarea)">actualizar</button>
+        <button class="btn btn-success" (click)="actualizarTarea(tarea)">
+          <i class="fa fa-cloud-upload-alt"></i>
+        </button>
       </td>
     </tr>
   </tbody>
