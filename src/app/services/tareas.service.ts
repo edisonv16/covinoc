@@ -9,9 +9,9 @@ import { map, delay } from 'rxjs/operators';
 export class TareaService {
 
   private url = 'https://tareas-6f894-default-rtdb.firebaseio.com';
-
   constructor(private http: HttpClient) {}
 
+ //crear una tarea
   createTarea( tarea: TareaModel){
     return this.http.post(`${this.url}/tareas.json`,tarea)
     .pipe(
@@ -22,11 +22,30 @@ export class TareaService {
     );
   }
 
+  getTareaId(id:string){
+    return this.http.get(`${this.url}/tareas/${id}.json`);
+  } 
+  //Actualizar una tarea
+  actualizarTarea(tarea: TareaModel){
+
+    const tareaTemp ={
+      ...tarea
+    };
+    delete tareaTemp.id;
+
+    return this.http.patch(`${this.url}/tareas/${tarea.id}.json`,tareaTemp );
+  }
+  //borrar una tarea
+  borrarTarea(id:string){
+    return this.http.delete(`${this.url}/tareas/${id}.json`);
+  } 
+
+  //llamar datos de una tarea
   getTareas(){
     return this.http.get(`${this.url}/tareas.json`)
     .pipe(
       map( this.crearArreglo),
-      delay(1500)
+      delay(800)
     );
   }
 
@@ -40,4 +59,6 @@ export class TareaService {
     if (tareaObj === null){return[];}
     return productos;
   }
+    
+  
 }

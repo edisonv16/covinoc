@@ -3,6 +3,7 @@ import { TareaModel } from 'src/app/models/tarea.model';
 import { NgForm } from '@angular/forms';
 import { TareaService } from '../../services/tareas.service';
 import Swal from 'sweetalert2';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nueva-tarea',
@@ -23,11 +24,38 @@ export class NuevaTareaComponent implements OnInit {
       return;
 
     }
-    this.tareasService.createTarea(this.tarea)
-    .subscribe(resp => {
-      console.log(resp);
-      this.tarea = resp;
-    })
+
+    Swal.fire({
+      title: 'Espere',
+      text: 'Guardando Información',
+      icon: 'info',
+      allowOutsideClick: false
+    });
+
+    Swal.showLoading();
+
+    let peticion: Observable<any>;
+
+    if(this.tarea.id){
+      peticion = this.tareasService.actualizarTarea(this.tarea);
+    }else{
+     peticion = this.tareasService.createTarea(this.tarea);
+    }
+
+    peticion.subscribe( resp =>{
+      Swal.fire({
+        title: this.tarea.nombre,
+        text: 'Se actualizo correctamente',
+        icon: 'success'
+      })
+    });
+
+
+    // this.tareasService.createTarea(this.tarea)
+    // .subscribe(resp => {
+    //   console.log(resp);
+    //   this.tarea = resp;
+    // })
    
   }
 
