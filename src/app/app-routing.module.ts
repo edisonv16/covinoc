@@ -17,9 +17,6 @@ const routes: Routes = [
   {path:'buscartarea/:termino', component: BuscarTareaComponent},
   {path:'tarea/:id', component: NuevaTareaComponent},
   {path:'**', pathMatch: 'full', redirectTo:'Home'}
-
-
-
 ];
 
 @NgModule({
