@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buscar-tarea',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuscarTareaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  
+  buscarProducto(termino:string){
+     console.log(termino);
+
+    this.router.navigate(['/busqueda', termino]);
   }
 
 }

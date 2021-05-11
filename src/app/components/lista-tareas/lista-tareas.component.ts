@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { TareaModel } from 'src/app/models/tarea.model';
 import { TareaService } from 'src/app/services/tareas.service';
 import Swal from 'sweetalert2';

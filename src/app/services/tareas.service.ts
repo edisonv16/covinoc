@@ -60,6 +60,4 @@ export class TareaService {
     if (tareaObj === null){return[];}
     return productos;
   }
-    
-  
 }
