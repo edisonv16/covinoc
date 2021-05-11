@@ -8,7 +8,7 @@
             <a class="nav-link" routerLinkActive="active" routerLink="/home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="/tareas">lista</a>
+            <a class="nav-link" routerLinkActive="active" routerLink="/tareas" *ngIf="(auth.isAuthenticated$ | async)">lista</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="/protegida" *ngIf="(auth.isAuthenticated$ | async)">protegido</a>

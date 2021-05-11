@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { TareaModel } from 'src/app/models/tarea.model';
 import { TareaService } from 'src/app/services/tareas.service';
 import Swal from 'sweetalert2';
@@ -14,7 +14,8 @@ export class ListaTareasComponent implements OnInit {
   tarea: TareaModel [] = [];
   cargando = false;
 
-  constructor(private tareaServices: TareaService ) { }
+  constructor(private tareaServices: TareaService,
+    public auth: AuthService ) { }
 
   ngOnInit(): void {
     this.cargando = true;

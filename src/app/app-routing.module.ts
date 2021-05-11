@@ -6,11 +6,13 @@ import { ListaTareasComponent } from './components/lista-tareas/lista-tareas.com
 import { NuevaTareaComponent } from './components/nueva-tarea/nueva-tarea.component';
 import { ProtegidaComponent } from './components/protegida/protegida.component';
 
+import { AuthGuard } from '@auth0/auth0-angular';
+
 
 const routes: Routes = [
   {path:'Home', component: HomeComponent},
-  {path:'tareas', component: ListaTareasComponent},
-  {path:'protegida', component: ProtegidaComponent},
+  {path:'tareas', component: ListaTareasComponent, canActivate:[AuthGuard]},
+  {path:'protegida', component: ProtegidaComponent, canActivate:[AuthGuard] },
   {path:'buscartarea', component: BuscarTareaComponent},
   {path:'buscartarea/:termino', component: BuscarTareaComponent},
   {path:'tarea/:id', component: NuevaTareaComponent},

@@ -1,7 +1,8 @@
 <app-nueva-tarea></app-nueva-tarea>
+<div class="container">
 <div class="row">
   <div class="col text-right"><i class="fa fa-list"></i> Lista de tareas</div>
-  <app-buscar-tarea></app-buscar-tarea>
+  <app-buscar-tarea class="col"></app-buscar-tarea>
 </div>
   
 <table class="table mt-3">
@@ -14,7 +15,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody *ngIf="auth.user$ | async as user">
     <tr *ngFor="let tarea of tarea; let i = index">
       <th scope="row">{{ i + 1 }}</th>
       <td [ngClass]="tarea.estado ? 'classtrue' : 'classfalse'">
@@ -62,4 +63,7 @@
     <i class="fa fa-sync-alt fa-spin fa-2x"></i>
   </p>
   <div class="mb-0">Espere porfavor</div>
+</div>
+
+
 </div>
